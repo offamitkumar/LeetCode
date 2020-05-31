@@ -10,32 +10,16 @@
  * };
  */
 class Solution {
-    void reverse_tree(TreeNode*root){
-        if (root == nullptr) {
-            return ;
-        }
-        
-        if (root -> left != nullptr && root -> right != nullptr) {
-            TreeNode* temp  = root-> left;
-            root -> left = root -> right;
-            root -> right = temp;
-            reverse_tree(root -> left);
-            reverse_tree(root -> right);
-        } else if ( root -> left != nullptr ) {
-            TreeNode* temp = root -> left;
-            root -> left = nullptr;
-            root -> right = temp;
-            reverse_tree(root -> right);
-        } else if ( root -> right != nullptr ) {
-            TreeNode* temp = root -> right;
-            root -> right = nullptr;
-            root -> left = temp;
-            reverse_tree(root -> left);
-        }
-    }
 public:
     TreeNode* invertTree(TreeNode* root) {
-        reverse_tree(root);
+        if(root == nullptr) {
+            return nullptr;
+        }
+        TreeNode*temp = root->left;
+        root -> left = root -> right;
+        root -> right = temp;
+        invertTree(root -> left);
+        invertTree(root -> right);
         return root;
     }
 };
