@@ -18,9 +18,6 @@ private:
             if (targetSum == currentSum ) {
                 res.push_back(path); 
             }
-            path.pop_back(); 
-            currentSum -= root->val; 
-            return ;
         }
         if (root -> left != nullptr) {
             dfs(root->left, currentSum, targetSum, path, res); 
