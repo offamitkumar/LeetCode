@@ -10,29 +10,23 @@
  * };
  */
 class Solution {
-    int dfs(TreeNode* root , int currentSum , int targetSum) {
-        if (root == nullptr) {
-            return 0; 
-        }
-        currentSum+=root->val; 
-        int res{};
-        if (targetSum == currentSum) {
-            res++; 
-        }
-        if (root -> right != nullptr ) {
-            res+= dfs(root->right , currentSum , targetSum); 
-        }
-        if (root -> left != nullptr ) {
-            res += dfs(root->left , currentSum , targetSum); 
-        }
-        return res; 
+    map<int, int>dic; 
+    int counter;
+    void dfs(TreeNode *root , int currentSum , int targetSum) {
+        if (root==nullptr)
+            return ; 
+        currentSum+= root->val; 
+        counter += dic[currentSum - targetSum]; 
+        dic[currentSum]++; 
+        dfs(root->left , currentSum , targetSum); 
+        dfs(root->right , currentSum , targetSum);
+        dic[currentSum]--;
     }
 public:
-    int pathSum(TreeNode* root, int targetSum) {
-        if (root == nullptr) {
-            return 0;
-        }
-        return pathSum(root->left , targetSum) + dfs(root , 0 , targetSum) + pathSum(root->right , targetSum); 
+    int pathSum(TreeNode* root, int targetSum ) {
+        counter = 0; 
+        dic[0] = 1;
+        dfs(root , 0 , targetSum); 
+        return counter;
     }
 };
-;
