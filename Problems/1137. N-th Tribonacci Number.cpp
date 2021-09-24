@@ -6,7 +6,7 @@ public:
         }else if (n==1) {
             return 1; 
         }else if (n==2) {
-            return 2; 
+            return 1; 
         }else {
             vector<int64_t>v={0,1,1}; 
             for (int i=3; i<=n; ++i) {
