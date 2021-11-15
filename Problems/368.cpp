@@ -20,8 +20,6 @@ public:
             }
         }
         int pre = 1;
-        cout << max_sum << endl;
-        // cout << divi[2] <<  endl;
         for(int i=n-1;i>=0;--i){
             if(max_sum == divi[i] && (pre==1 || pre%nums[i]==0)){
                 res.push_back(nums[i]);
