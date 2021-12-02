@@ -11,40 +11,17 @@
 class Solution {
 public:
     ListNode* oddEvenList(ListNode* head) {
-        if(head == nullptr){
+        if(head == nullptr || head -> next == nullptr || head -> next -> next == nullptr){
             return head;
         }
-        ListNode* even , *temp;
-        ListNode* odd = head;
-        ListNode* even_s; // point the starting of even list 
-        if(head -> next != nullptr){
-            even_s = head ->next;
-            even = head -> next;
-        }else{
-            return head;
+        ListNode* even = head -> next , *n_even = head -> next , *odd = head; 
+        while (even != nullptr && even->next != nullptr) {
+            odd -> next = even->next; 
+            odd = odd -> next; 
+            even -> next = odd -> next; 
+            even = even -> next; 
         }
-        if( even ->next != nullptr ){
-            temp = even -> next;
-        }else{
-            return head;
-        }
-        int counter = 1;
-        while( temp != nullptr ){
-            // swap with odd
-            ListNode*Temp;
-            ListNode*lastSeen= temp->next;
-            if(counter&1){
-                ++counter;
-                odd -> next = temp;
-                even -> next = temp->next;
-                odd = odd->next;
-                odd->next = even_s;
-                even = even ->next;
-            }else{
-                ++counter;
-            }
-            temp = lastSeen;
-        }
+        odd -> next = n_even; 
         return head;
     }
 };
