@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<int> partitionLabels(string s) {
         vector<int>ans; 
-        array<int, 26>lastIndex; 
+        int lastIndex[26] = {0}; 
         const int &n = s.size(); 
         for (int i=0; i<n; ++i) {
             lastIndex[s[i]-'a'] = i; 
