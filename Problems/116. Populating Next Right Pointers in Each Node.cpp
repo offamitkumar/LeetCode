@@ -17,28 +17,21 @@ public:
 */
 
 class Solution {
+    void dfs(Node*root) {
+        if (root == nullptr || root->right == nullptr || root -> left == nullptr) {
+            return ;
+        }
+        root->left->next = root->right; 
+        if (root->next != nullptr) {
+            root->right->next = root->next->left; 
+        }
+        connect(root->right); 
+        connect(root->left); 
+        return ;
+    }
 public:
     Node* connect(Node* root) {
-        if (root == nullptr) {
-            return root; 
-        }
-        queue<Node*>q; 
-        q.push(root); 
-        q.push(nullptr); 
-        while (q.size()>1) {
-            Node*r = q.front(); q.pop(); 
-            r->next = q.front(); 
-            if (r->left != nullptr) {
-                q.push(r->left); 
-            }
-            if (r->right != nullptr) {
-                q.push(r->right); 
-            }
-            if (q.front() == nullptr) {
-                q.pop(); 
-                q.push(nullptr);
-            }
-        }
+        dfs(root); 
         return root; 
     }
 };
