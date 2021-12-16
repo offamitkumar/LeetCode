@@ -1,30 +1,67 @@
 int temp(void) {
     ios_base::sync_with_stdio(0); 
-    cin.tie(nullptr); 
     cout.tie(nullptr); 
+    cin.tie(nullptr); 
     return 0; 
 }
-static int x = temp();
+static int x = temp(); 
 class Solution {
 public:
     long long kthSmallestProduct(vector<int>& nums1, vector<int>& nums2, long long k) {
-        auto position = [&] (double val) {
-            long long pos = 0; 
-            for (auto&itr:nums1) {
-                if ( itr < 0) pos += nums2.end() - lower_bound(nums2.begin(), nums2.end(), ceil(val/itr)); 
-                else if (itr>0) pos += upper_bound(nums2.begin(), nums2.end(), floor(val/itr)) - nums2.begin(); 
-                else
-                    if (0<=val)
-                        pos += nums2.size(); 
+        auto find_min_idx = [&] (long long product , long long num) {
+            long long low = 0 , high = nums2.size()-1; 
+            long long res = high + 1; 
+            while (low <= high) {
+                long long mid = low + (high-low)/2ll; 
+                if (num * nums2[mid] <= product) {
+                    res = mid; 
+                    high = mid -1; 
+                } else {
+                    low = mid + 1; 
+                }
             }
-            return pos;
+            return nums2.size() - res; 
+        }; 
+        auto find_max_idx = [&] (long long product , long long num) {
+            long long low = 0 , high = nums2.size()-1; 
+            long long res = -1; 
+            while (low <= high) {
+                long long mid = low + (high - low) /2ll; 
+                if ( num * nums2[mid] <= product) {
+                    res = mid ; 
+                    low = mid + 1; 
+                } else {
+                    high =  mid -1; 
+                }
+            }
+            return res + 1; 
         };
-        int64_t low = -1e10 , high = 1e10; 
-        while (low < high) {
-            int64_t mid = low +(high-low)/2ll; 
-            if (position(mid)<k) low = mid+1ll; 
-            else high = mid; 
+        auto count = [&] (long long product) {
+            long long counter{}; 
+            for (auto&itr: nums1) {
+                if (itr == 0) {
+                    if (product >=0) {
+                        counter+= nums2.size(); 
+                    }
+                } else if (itr > 0) {
+                    counter += find_max_idx(product , itr);
+                } else {
+                    counter += find_min_idx(product , itr); 
+                }
+            }
+            return counter; 
+        };
+        long long low=-1e10 , high= 1e10+1; 
+        long long res{};
+        while (low <= high) {
+            long long mid = low + (high - low) / 2ll; 
+            if (count(mid) >= k) {
+                res = mid; 
+                high = mid -1;
+            } else {
+                low = mid + 1;
+            }
         }
-        return low; 
+        return res;  
     }
 };
