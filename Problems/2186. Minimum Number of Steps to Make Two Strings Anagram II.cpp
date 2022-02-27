@@ -1,16 +1,16 @@
 class Solution {
 public:
     int minSteps(string s, string t) {
-        map<char,int>mp; 
+        vector<int>arr(26); 
         for (auto&itr:s) {
-            mp[itr]++; 
+            arr[itr-'a']++; 
         }
         for (auto&itr:t) {
-            mp[itr]--; 
+            arr[itr-'a']--; 
         }
         int counter{}; 
-        for (auto&itr:mp) {
-            counter += abs(itr.second); 
+        for (auto&itr:arr) {
+            counter += abs(itr); 
         }
         return counter; 
     }
