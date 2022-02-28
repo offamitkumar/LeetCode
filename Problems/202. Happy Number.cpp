@@ -13,7 +13,6 @@ class Solution {
         while(n!=1 && s.find(n)==s.end()){
             s.insert(n);
             n = f(n);
-            cout<<n<<endl;
         }
         return (n==1)?true:false;
     }
