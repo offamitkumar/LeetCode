@@ -9,6 +9,6 @@ public:
             f[s[i]-'a']++;
             f[t[i]-'a']--;
         }
-        return all_if(f.begin(),f.end() , [](bool x) {return x == true;}); 
+        return all_of(f.begin(),f.end() , [](bool x) {return x == 0;}); 
     }
 };
