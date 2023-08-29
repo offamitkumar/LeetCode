@@ -628,4 +628,4 @@ add_executable(LeetCode
         "Problems/99. Recover Binary Search Tree.cpp"
         Problems/993.cpp
         "Problems/994. Rotting Oranges.cpp"
-        Problems/997.cpp)
+        Problems/997.cpp "Problems/2830. Maximize the Profit as the Salesman.cpp")
