@@ -1,3 +1,0 @@
-/Users/amitkumar/LeetCode/cmake-build-debug/CMakeFiles/LeetCode.dir
-/Users/amitkumar/LeetCode/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/amitkumar/LeetCode/cmake-build-debug/CMakeFiles/rebuild_cache.dir
