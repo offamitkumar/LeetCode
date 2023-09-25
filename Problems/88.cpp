@@ -1,21 +1,28 @@
+//
+// Created by Amit Kumar on 24/09/2023
+//
+// https://leetcode.com/problems/merge-sorted-array
+//
+
+#include "vector"
+
+using namespace std;
 class Solution {
 public:
     void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
-        vector<int>ans(m+n); 
-        int c = 0,l=0 , r=0; 
-        while (l<m and r <n) {
-            if (nums1[l] < nums2[r]) {
-                ans[c++] = nums1[l++];
+        int i = m - 1;
+        int j = n - 1;
+        int k = m + n - 1;
+
+        while (j >= 0) {
+            if (i >= 0 and nums1.at(i) >= nums2.at(j)) {
+                nums1.at(k) = nums1.at(i);
+                i--;
             } else {
-                ans[c++] = nums2[r++];
+                nums1.at(k) = nums2.at(j);
+                j--;
             }
+            k--;
         }
-        while (l<m) {
-            ans[c++] = nums1[l++];
-        }
-        while (r<n) {
-            ans[c++] = nums2[r++];
-        }
-        nums1 = ans; 
     }
 };
