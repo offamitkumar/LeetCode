@@ -1,19 +1,19 @@
+//
+// Created by Amit Kumar on 28/09/23
+//
+
+#include "vector"
+
+using namespace std;
 class Solution {
 public:
-    int removeDuplicates(vector<int>& arr) {
-        int counter{};
-        int j =1;
-        for(auto i=0; i<(int)arr.size(); ++i){
-            int k = i;
-            while(i<(int)arr.size() && arr[k] == arr[i] ){
-                ++i;
-            }
-            --i;
-            ++counter;
-            if(k==0)continue;
-            
-            swap(arr[j++] , arr[i]);
+    int removeDuplicates(vector<int>& nums) {
+        int frontPointer{};
+        for (int i=0; i<(int)nums.size(); ++frontPointer) {
+            nums.at(frontPointer) = nums.at(i);
+            while (i < (int)nums.size() and nums.at(i) == nums.at(frontPointer)) i++;
         }
-        return counter;
+        return frontPointer;
+//        return distance(nums.begin(), unique(nums.begin(), nums.end()));
     }
 };
